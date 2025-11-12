@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using PdvProject;
 using System.Data.SQLite;
 
 namespace PdvDesktop
@@ -78,6 +79,8 @@ namespace PdvDesktop
 
             //dgvItens.Visible = false;    
             #endregion
+
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -99,10 +102,10 @@ namespace PdvDesktop
             {
                 caixaFechado.Visible = false;
             }
-
+            txtCodigoBarras.Focus();
         }
 
-        private void TxtCodigoBarras_KeyDown(object sender, KeyEventArgs e)
+        private void txtCodigoBarras_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -142,9 +145,26 @@ namespace PdvDesktop
                             }
                             else
                             {
-                                MessageBox.Show("Produto não encontrado!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                txtNome.Clear();
-                                txtPrecoUnitario.Clear();
+                                DialogResult resultado = MessageBox.Show(
+                                    "Produto não encontrado. Deseja cadastrar?",
+                                    "Aviso",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Question
+                                );
+
+                                // Verifica qual botão o usuário clicou
+                                if (resultado == DialogResult.Yes)
+                                {
+                                    CadastroProdutoForm cadastroProduto = new CadastroProdutoForm();
+                                    cadastroProduto.ShowDialog();
+                                }
+                                else
+                                {
+                                    txtNome.Clear();
+                                    txtPrecoUnitario.Clear();
+                                    txtCodigoBarras.Clear();
+                                }
+
                             }
                         }
                     }
@@ -201,6 +221,27 @@ namespace PdvDesktop
             {
                 caixaFechado.Close();
             }
+        }
+
+        private void btnFinalizarVenda_Click(object sender, EventArgs e)
+        {
+            FinalizarVenda finalizarVenda = new FinalizarVenda(iCodigoUsuario, sNome, totalVenda);
+            finalizarVenda.ShowDialog();
+
+            if (finalizarVenda.VendaFinalizada)
+            {
+                ReiniciarVenda();
+            }
+
+        }
+
+        public void ReiniciarVenda()
+        {
+            this.dgvItens.Rows.Clear();
+            this.lblTotal.Text = "";
+            this.txtPrecoTotal.Text = "";
+            this.txtPrecoUnitario.Text = "";
+            this.txtCodigoBarras.Focus();
         }
     }
 }

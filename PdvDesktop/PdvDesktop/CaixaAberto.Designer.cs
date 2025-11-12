@@ -57,6 +57,7 @@
             Preco = new DataGridViewTextBoxColumn();
             Qtd = new DataGridViewTextBoxColumn();
             Total = new DataGridViewTextBoxColumn();
+            btnFinalizarVenda = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvItens).BeginInit();
@@ -64,12 +65,13 @@
             // 
             // txtNome
             // 
+            txtNome.Enabled = false;
             txtNome.Font = new Font("Segoe UI", 14F);
             txtNome.Location = new Point(12, 12);
             txtNome.Multiline = true;
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(1239, 42);
-            txtNome.TabIndex = 0;
+            txtNome.TabIndex = 2;
             // 
             // label1
             // 
@@ -87,10 +89,10 @@
             // txtCodigoBarras
             // 
             txtCodigoBarras.Location = new Point(14, 83);
-            txtCodigoBarras.Multiline = true;
             txtCodigoBarras.Name = "txtCodigoBarras";
-            txtCodigoBarras.Size = new Size(306, 42);
-            txtCodigoBarras.TabIndex = 2;
+            txtCodigoBarras.Size = new Size(306, 23);
+            txtCodigoBarras.TabIndex = 0;
+            txtCodigoBarras.KeyDown += txtCodigoBarras_KeyDown;
             // 
             // label2
             // 
@@ -126,6 +128,7 @@
             // 
             // txtPrecoUnitario
             // 
+            txtPrecoUnitario.Enabled = false;
             txtPrecoUnitario.Location = new Point(769, 80);
             txtPrecoUnitario.Multiline = true;
             txtPrecoUnitario.Name = "txtPrecoUnitario";
@@ -134,6 +137,7 @@
             // 
             // txtPrecoTotal
             // 
+            txtPrecoTotal.Enabled = false;
             txtPrecoTotal.Location = new Point(1008, 80);
             txtPrecoTotal.Multiline = true;
             txtPrecoTotal.Name = "txtPrecoTotal";
@@ -238,9 +242,9 @@
             // 
             // btnFecharTela
             // 
-            btnFecharTela.Location = new Point(14, 587);
+            btnFecharTela.Location = new Point(14, 568);
             btnFecharTela.Name = "btnFecharTela";
-            btnFecharTela.Size = new Size(167, 23);
+            btnFecharTela.Size = new Size(137, 42);
             btnFecharTela.TabIndex = 16;
             btnFecharTela.Text = "FINALIZAR ATIVIDADE";
             btnFecharTela.UseVisualStyleBackColor = true;
@@ -260,14 +264,14 @@
             Codigo.HeaderText = "Código";
             Codigo.Name = "Codigo";
             Codigo.ReadOnly = true;
-            Codigo.Width = 90;
+            Codigo.Width = 140;
             // 
             // Nome
             // 
             Nome.HeaderText = "Produto";
             Nome.Name = "Nome";
             Nome.ReadOnly = true;
-            Nome.Width = 450;
+            Nome.Width = 350;
             // 
             // Preco
             // 
@@ -296,12 +300,23 @@
             Total.ReadOnly = true;
             Total.Width = 90;
             // 
+            // btnFinalizarVenda
+            // 
+            btnFinalizarVenda.Location = new Point(404, 568);
+            btnFinalizarVenda.Name = "btnFinalizarVenda";
+            btnFinalizarVenda.Size = new Size(96, 47);
+            btnFinalizarVenda.TabIndex = 18;
+            btnFinalizarVenda.Text = "FINALIZAR VENDA";
+            btnFinalizarVenda.UseVisualStyleBackColor = true;
+            btnFinalizarVenda.Click += btnFinalizarVenda_Click;
+            // 
             // CaixaAberto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.MenuHighlight;
             ClientSize = new Size(1271, 646);
+            Controls.Add(btnFinalizarVenda);
             Controls.Add(dgvItens);
             Controls.Add(btnFecharTela);
             Controls.Add(toolStrip1);
@@ -327,6 +342,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Pdv - Caixa";
             Load += CaixaAberto_Show;
+            Shown += CaixaAberto_Show;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -362,5 +378,6 @@
         private DataGridViewTextBoxColumn Preco;
         private DataGridViewTextBoxColumn Qtd;
         private DataGridViewTextBoxColumn Total;
+        private Button btnFinalizarVenda;
     }
 }

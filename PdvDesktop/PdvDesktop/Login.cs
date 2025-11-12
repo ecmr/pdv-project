@@ -36,14 +36,7 @@ namespace PdvDesktop
                     MessageBox.Show("Preencha todos os campos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
-                /*    if (!decimal.TryParse(precoTexto.Replace(",", "."), out decimal preco))
-                    {
-                        MessageBox.Show("Preço inválido! Use apenas números e vírgula.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    MessageBox.Show(preco.ToString());
-                */
+                
                 try
                 {
                     if (!File.Exists(dbPath))
